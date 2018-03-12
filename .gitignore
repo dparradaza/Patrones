@@ -89,6 +89,9 @@ dist/
 nbdist/
 .nb-gradle/
 nbactions.xml
-
+nbproject/
+test/
+build.xml
+manifest.mf
 
 
