@@ -1,9 +1,9 @@
 package reporte;
 /* Build the report about SE course*/
 /*Adapted by HAD*/
-public class ReportBuilderSE implements IReportBuilder{
+public class ReportBuilderEstudiante implements IReportBuilder{
       private Report report; 
-	  public ReportBuilderSE(){
+	  public ReportBuilderEstudiante(){
 	    report = new Report();
 	  }
 	  @Override

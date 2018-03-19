@@ -1,9 +1,9 @@
 package reporte;
 /* Build the report about Complex Theory course*/
 /*Adapted by HAD*/
-public class ReportBuilderTEL implements IReportBuilder{
+public class ReportBuilderMateria implements IReportBuilder{
     private Report report; 
-	  public ReportBuilderTEL(){
+	  public ReportBuilderMateria(){
 	    report = new Report();
 	  }
 	  @Override

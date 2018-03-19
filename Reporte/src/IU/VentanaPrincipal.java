@@ -23,6 +23,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import reporte.IReportBuilder;
+import reporte.Report;
+import reporte.ReportBuilderEstudiante;
+import reporte.ReportBuilderMateria;
+import reporte.ReportDirector;
 
 /**
  *
@@ -60,17 +65,17 @@ public static final String nuevaLinea = "\n";
       new JLabel("Tipo de reporte:");
     JLabel lblSelectedCandidates = new JLabel("Reporte:");
 
-    //Create the open button
-    JButton btnGetSelectedCandidates =
+    //Create the generarReporte button
+    JButton btnGetGenerarReporte =
       new JButton(VentanaPrincipal.GENERAR_REPORTE);
    // btnGetSelectedCandidates.setMnemonic(VentanaPrincipal.VK_R);
-    JButton btnExit = new JButton(VentanaPrincipal.SALIR);
-    btnExit.setMnemonic(KeyEvent.VK_X);
+    JButton btnSalir = new JButton(VentanaPrincipal.SALIR);
+    btnSalir.setMnemonic(KeyEvent.VK_X);
 
     buttonHandler vf = new buttonHandler(this);
 
-    btnGetSelectedCandidates.addActionListener(vf);
-    btnExit.addActionListener(vf);
+    btnGetGenerarReporte.addActionListener(vf);
+    btnSalir.addActionListener(vf);
 
     //For layout purposes, put the buttons in a separate panel
     JPanel buttonPanel = new JPanel();
@@ -79,16 +84,16 @@ public static final String nuevaLinea = "\n";
 
     GridBagLayout gridbag2 = new GridBagLayout();
     panel.setLayout(gridbag2);
-    panel.add(btnGetSelectedCandidates);
-    panel.add(btnExit);
+    panel.add(btnGetGenerarReporte);
+    panel.add(btnSalir);
 
     GridBagConstraints gbc2 = new GridBagConstraints();
     gbc2.gridx = 0;
     gbc2.gridy = 0;
-    gridbag2.setConstraints(btnGetSelectedCandidates, gbc2);
+    gridbag2.setConstraints(btnGetGenerarReporte, gbc2);
     gbc2.gridx = 3;
     gbc2.gridy = 0;
-    gridbag2.setConstraints(btnExit, gbc2);
+    gridbag2.setConstraints(btnSalir, gbc2);
 
     //****************************************************
 
@@ -146,11 +151,11 @@ public static final String nuevaLinea = "\n";
   }
 
 
-  public String getCertificationType() {
+  public String getTipoReporte() {
     return (String) cmbTipoReporte.getSelectedItem();
   }
-  public void setSelectedCandidates(String selectedCandidates) {
-    taReporte.setText(selectedCandidates);
+  public void setSelectedReporte(String selectedReporte) {
+    taReporte.setText(selectedReporte);
   }
 
 }
@@ -159,10 +164,38 @@ class buttonHandler implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getActionCommand().equals(VentanaPrincipal.SALIR)) {
-      System.exit(1);
+      System.exit(0);
     }
     if (e.getActionCommand().equals(VentanaPrincipal.GENERAR_REPORTE)) {
-      String selection = manager.getCertificationType();
+      String selection = manager.getTipoReporte();
+      /////////////////////////////////////////////////////////////////// Generar Reportes por consola
+        if(selection.equals("Estudiantes")){
+        IReportBuilder builder = new ReportBuilderEstudiante();
+        ReportDirector reportDirector = new ReportDirector(builder);
+        reportDirector.buildReport();
+        Report report = reportDirector.getReport();
+        //use report object as per business
+        System.out.println(report.getReportTitle());
+        System.out.println(report.getHeader());
+        System.out.println(report.getPreface());
+        System.out.println(report.getContent());
+        System.out.println(report.getFooter());
+        }else{
+        
+        IReportBuilder builder1 = new ReportBuilderMateria();
+        ReportDirector reportDirector1 = new ReportDirector(builder1);
+        reportDirector1.buildReport();
+        Report report1 = reportDirector1.getReport();
+        //use report object as per business
+        System.out.println(report1.getReportTitle());
+        System.out.println(report1.getHeader());
+        System.out.println(report1.getPreface());
+        System.out.println(report1.getContent());
+        System.out.println(report1.getFooter());
+        }
+      ///////////////////////////////////////////////////////////////////// fin
+      
+        
       //AllCandidates ac = new VentanaPrincipal();
       /*
       Iterator certCandidates =
