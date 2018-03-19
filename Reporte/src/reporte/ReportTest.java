@@ -5,11 +5,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
-/*App client*/
+
 public class ReportTest {
 
     public static void main(String[] args) throws Exception {
-
+        
+        CargarDatos cd= new CargarDatos();
+        cd.leer("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/datos.txt");
         VentanaPrincipal v = new VentanaPrincipal();
         JFrame frame = new VentanaPrincipal();
         frame.addWindowListener(new WindowAdapter() {
@@ -18,10 +20,8 @@ public class ReportTest {
             }
         }
         );
-
         frame.setSize(600, 500);
         frame.setVisible(true);
 
-       
     }
 }

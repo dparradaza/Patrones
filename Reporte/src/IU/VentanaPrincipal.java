@@ -29,192 +29,170 @@ import reporte.ReportBuilderEstudiante;
 import reporte.ReportBuilderMateria;
 import reporte.ReportDirector;
 
-/**
- *
- * @author diego
- */
 public class VentanaPrincipal extends JFrame {
-public static final String nuevaLinea = "\n";
-  public static final String GENERAR_REPORTE = "Generar Reporte";
-  public static final String SALIR = "Salir";
-  public static final String ESTUDIANTES = "Estudiantes";
-  public static final String ASIGNATURAS = "Asignaturas";
-  
 
-  private JComboBox cmbTipoReporte;
-  private JPanel pSearchCriteria;
-  private JTextArea taReporte;
+    public static final String nuevaLinea = "\n";
+    public static final String GENERAR_REPORTE = "Generar Reporte";
+    public static final String SALIR = "Salir";
+    public static final String ESTUDIANTES = "Estudiantes";
+    public static final String ASIGNATURAS = "Asignaturas";
 
-  public VentanaPrincipal() throws Exception {
-    super("Iterator Pattern - Example");
+    private JComboBox cmbTipoReporte;
+    private JPanel pSearchCriteria;
+    private JTextArea taReporte;
 
-    // Create controls
-    cmbTipoReporte = new JComboBox();
-    taReporte = new JTextArea(15, 20);
-    //taSelectedCandidates.setMargin(new Insets(1,1,1,1));
-    taReporte.setEditable(false);
+    public VentanaPrincipal() throws Exception {
+        super("Iterator Pattern - Example");
 
-    pSearchCriteria = new JPanel();
+        // Create controls
+        cmbTipoReporte = new JComboBox();
+        taReporte = new JTextArea(15, 20);
+        //taSelectedCandidates.setMargin(new Insets(1,1,1,1));
+        taReporte.setEditable(false);
 
-    cmbTipoReporte.addItem(VentanaPrincipal.ESTUDIANTES);
-    cmbTipoReporte.addItem(VentanaPrincipal.ASIGNATURAS);
-   
+        pSearchCriteria = new JPanel();
 
-    //Create Labels
-    JLabel lblCertificationType =
-      new JLabel("Tipo de reporte:");
-    JLabel lblSelectedCandidates = new JLabel("Reporte:");
+        cmbTipoReporte.addItem(VentanaPrincipal.ESTUDIANTES);
+        cmbTipoReporte.addItem(VentanaPrincipal.ASIGNATURAS);
 
-    //Create the generarReporte button
-    JButton btnGetGenerarReporte =
-      new JButton(VentanaPrincipal.GENERAR_REPORTE);
-   // btnGetSelectedCandidates.setMnemonic(VentanaPrincipal.VK_R);
-    JButton btnSalir = new JButton(VentanaPrincipal.SALIR);
-    btnSalir.setMnemonic(KeyEvent.VK_X);
+        //Create Labels
+        JLabel lblCertificationType
+                = new JLabel("Tipo de reporte:");
+        JLabel lblSelectedCandidates = new JLabel("Reporte:");
 
-    buttonHandler vf = new buttonHandler(this);
+        //Create the generarReporte button
+        JButton btnGetGenerarReporte
+                = new JButton(VentanaPrincipal.GENERAR_REPORTE);
+        // btnGetSelectedCandidates.setMnemonic(VentanaPrincipal.VK_R);
+        JButton btnSalir = new JButton(VentanaPrincipal.SALIR);
+        btnSalir.setMnemonic(KeyEvent.VK_X);
 
-    btnGetGenerarReporte.addActionListener(vf);
-    btnSalir.addActionListener(vf);
+        buttonHandler vf = new buttonHandler(this);
 
-    //For layout purposes, put the buttons in a separate panel
-    JPanel buttonPanel = new JPanel();
+        btnGetGenerarReporte.addActionListener(vf);
+        btnSalir.addActionListener(vf);
 
-    JPanel panel = new JPanel();
+        //For layout purposes, put the buttons in a separate panel
+        JPanel buttonPanel = new JPanel();
 
-    GridBagLayout gridbag2 = new GridBagLayout();
-    panel.setLayout(gridbag2);
-    panel.add(btnGetGenerarReporte);
-    panel.add(btnSalir);
+        JPanel panel = new JPanel();
 
-    GridBagConstraints gbc2 = new GridBagConstraints();
-    gbc2.gridx = 0;
-    gbc2.gridy = 0;
-    gridbag2.setConstraints(btnGetGenerarReporte, gbc2);
-    gbc2.gridx = 3;
-    gbc2.gridy = 0;
-    gridbag2.setConstraints(btnSalir, gbc2);
+        GridBagLayout gridbag2 = new GridBagLayout();
+        panel.setLayout(gridbag2);
+        panel.add(btnGetGenerarReporte);
+        panel.add(btnSalir);
 
-    //****************************************************
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        gridbag2.setConstraints(btnGetGenerarReporte, gbc2);
+        gbc2.gridx = 3;
+        gbc2.gridy = 0;
+        gridbag2.setConstraints(btnSalir, gbc2);
 
-    GridBagLayout gridbag = new GridBagLayout();
-    buttonPanel.setLayout(gridbag);
-    GridBagConstraints gbc = new GridBagConstraints();
+        //****************************************************
+        GridBagLayout gridbag = new GridBagLayout();
+        buttonPanel.setLayout(gridbag);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-    buttonPanel.add(lblCertificationType);
-    buttonPanel.add(cmbTipoReporte);
-    buttonPanel.add(lblSelectedCandidates);
-    buttonPanel.add(taReporte);
-    buttonPanel.add(panel);
+        buttonPanel.add(lblCertificationType);
+        buttonPanel.add(cmbTipoReporte);
+        buttonPanel.add(lblSelectedCandidates);
+        buttonPanel.add(taReporte);
+        buttonPanel.add(panel);
 
-    gbc.insets.top = 5;
-    gbc.insets.bottom = 5;
-    gbc.insets.left = 5;
-    gbc.insets.right = 5;
+        gbc.insets.top = 5;
+        gbc.insets.bottom = 5;
+        gbc.insets.left = 5;
+        gbc.insets.right = 5;
 
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    gridbag.setConstraints(lblCertificationType, gbc);
-    gbc.anchor = GridBagConstraints.WEST;
-    gbc.gridx = 1;
-    gbc.gridy = 0;
-    gridbag.setConstraints(cmbTipoReporte, gbc);
-    gbc.anchor = GridBagConstraints.WEST;
-    gbc.gridx = 0;
-    gbc.gridy = 1;
-    gridbag.setConstraints(lblSelectedCandidates, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gridbag.setConstraints(lblCertificationType, gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gridbag.setConstraints(cmbTipoReporte, gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gridbag.setConstraints(lblSelectedCandidates, gbc);
 
-    gbc.anchor = GridBagConstraints.WEST;
-    gbc.gridx = 1;
-    gbc.gridy = 1;
-    gridbag.setConstraints(taReporte, gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gridbag.setConstraints(taReporte, gbc);
 
-    gbc.insets.left = 2;
-    gbc.insets.right = 2;
-    gbc.insets.top = 40;
-    gbc.gridx = 1;
-    gbc.gridy = 6;
-    gridbag.setConstraints(panel, gbc);
+        gbc.insets.left = 2;
+        gbc.insets.right = 2;
+        gbc.insets.top = 40;
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        gridbag.setConstraints(panel, gbc);
 
-
-    //****************************************************
-    //Add the buttons and the log to the frame
-    Container contentPane = getContentPane();
-    contentPane.add(buttonPanel, BorderLayout.CENTER);
-    try {
-      UIManager.setLookAndFeel(new WindowsLookAndFeel());
-      SwingUtilities.updateComponentTreeUI(
-        VentanaPrincipal.this);
-    } catch (Exception ex) {
-      System.out.println(ex);
-    }
-  }
-
-
-  public String getTipoReporte() {
-    return (String) cmbTipoReporte.getSelectedItem();
-  }
-  public void setSelectedReporte(String selectedReporte) {
-    taReporte.setText(selectedReporte);
-  }
-
-}
-class buttonHandler implements ActionListener {
-  VentanaPrincipal manager;
-  public void actionPerformed(ActionEvent e) {
-
-    if (e.getActionCommand().equals(VentanaPrincipal.SALIR)) {
-      System.exit(0);
-    }
-    if (e.getActionCommand().equals(VentanaPrincipal.GENERAR_REPORTE)) {
-      String selection = manager.getTipoReporte();
-      /////////////////////////////////////////////////////////////////// Generar Reportes por consola
-        if(selection.equals("Estudiantes")){
-        IReportBuilder builder = new ReportBuilderEstudiante();
-        ReportDirector reportDirector = new ReportDirector(builder);
-        reportDirector.buildReport();
-        Report report = reportDirector.getReport();
-        //use report object as per business
-        manager.setSelectedReporte(report.getReportTitle()+"\n"
-                +report.getHeader()+"\n"+report.getPreface()+"\n"
-                +report.getContent()+"\n"+report.getFooter());
-        }else{      
-        IReportBuilder builder1 = new ReportBuilderMateria();
-        ReportDirector reportDirector1 = new ReportDirector(builder1);
-        reportDirector1.buildReport();
-        Report report1 = reportDirector1.getReport();
-        //use report object as per business
-        manager.setSelectedReporte(report1.getReportTitle()+"\n"
-                +report1.getHeader()+"\n"+report1.getPreface()+"\n"
-                +report1.getContent()+"\n"+report1.getFooter());      
+        //****************************************************
+        //Add the buttons and the log to the frame
+        Container contentPane = getContentPane();
+        contentPane.add(buttonPanel, BorderLayout.CENTER);
+        try {
+            UIManager.setLookAndFeel(new WindowsLookAndFeel());
+            SwingUtilities.updateComponentTreeUI(
+                    VentanaPrincipal.this);
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
-      ///////////////////////////////////////////////////////////////////// fin
-         
-      //AllCandidates ac = new VentanaPrincipal();
-      /*
-      Iterator certCandidates =
-        ac.getCertifiedCandidates(selection);
-      String selectedCandidates =
-        "Name --- Cert Type --- Location" + "\n" + 
-          "--------------------------------------";
-
-      while (certCandidates.hasNext()) {
-        Candidate c = (Candidate) certCandidates.next();
-        selectedCandidates = selectedCandidates + "\n" +
-            c.getName() + " - " + c.getCertificationType() + 
-              " - " + c.getLocation();
-      }
-      manager.setSelectedCandidates(selectedCandidates);
-      */
     }
-  }
-  public buttonHandler() {
-  }
-  public buttonHandler(VentanaPrincipal inmanager) {
-    manager = inmanager;
-  }
+
+    public String getTipoReporte() {
+        return (String) cmbTipoReporte.getSelectedItem();
+    }
+
+    public void setSelectedReporte(String selectedReporte) {
+        taReporte.setText(selectedReporte);
+    }
 
 }
 
-    
-  
+class buttonHandler implements ActionListener {
+
+    VentanaPrincipal manager;
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getActionCommand().equals(VentanaPrincipal.SALIR)) {
+            System.exit(0);
+        }
+        if (e.getActionCommand().equals(VentanaPrincipal.GENERAR_REPORTE)) {
+            String selection = manager.getTipoReporte();
+            //////////// Generar Reportes
+            if (selection.equals("Estudiantes")) {
+                IReportBuilder builder = new ReportBuilderEstudiante();
+                ReportDirector reportDirector = new ReportDirector(builder);
+                reportDirector.buildReport();
+                Report report = reportDirector.getReport();
+                //use report object as per business
+                manager.setSelectedReporte(report.getReportTitle() + "\n"
+                        + report.getHeader() + "\n" + report.getPreface() + "\n"
+                        + report.getContent() + "\n" + report.getFooter());
+            } else {
+                IReportBuilder builder1 = new ReportBuilderMateria();
+                ReportDirector reportDirector1 = new ReportDirector(builder1);
+                reportDirector1.buildReport();
+                Report report1 = reportDirector1.getReport();
+                //use report object as per business
+                manager.setSelectedReporte(report1.getReportTitle() + "\n"
+                        + report1.getHeader() + "\n" + report1.getPreface() + "\n"
+                        + report1.getContent() + "\n" + report1.getFooter());
+            }
+      
+        }
+    }
+
+    public buttonHandler() {
+    }
+
+    public buttonHandler(VentanaPrincipal inmanager) {
+        manager = inmanager;
+    }
+
+}

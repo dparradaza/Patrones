@@ -1,6 +1,5 @@
 package reporte;
-/* Build the report about SE course*/
-/*Adapted by HAD*/
+
 public class ReportBuilderEstudiante implements IReportBuilder{
       private Report report; 
 	  public ReportBuilderEstudiante(){
