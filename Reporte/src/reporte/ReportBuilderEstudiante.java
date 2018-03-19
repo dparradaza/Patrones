@@ -28,7 +28,7 @@ public class ReportBuilderEstudiante implements IReportBuilder{
 	  }
 	  @Override
 	  public void buildReportTitle() {
-	    report.setReportTitle("Software Engineering Report(1)");
+	    report.setReportTitle("Reporte Estudiantes(1)");
 	  }
 }
 

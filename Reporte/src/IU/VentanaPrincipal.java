@@ -175,27 +175,21 @@ class buttonHandler implements ActionListener {
         reportDirector.buildReport();
         Report report = reportDirector.getReport();
         //use report object as per business
-        System.out.println(report.getReportTitle());
-        System.out.println(report.getHeader());
-        System.out.println(report.getPreface());
-        System.out.println(report.getContent());
-        System.out.println(report.getFooter());
-        }else{
-        
+        manager.setSelectedReporte(report.getReportTitle()+"\n"
+                +report.getHeader()+"\n"+report.getPreface()+"\n"
+                +report.getContent()+"\n"+report.getFooter());
+        }else{      
         IReportBuilder builder1 = new ReportBuilderMateria();
         ReportDirector reportDirector1 = new ReportDirector(builder1);
         reportDirector1.buildReport();
         Report report1 = reportDirector1.getReport();
         //use report object as per business
-        System.out.println(report1.getReportTitle());
-        System.out.println(report1.getHeader());
-        System.out.println(report1.getPreface());
-        System.out.println(report1.getContent());
-        System.out.println(report1.getFooter());
+        manager.setSelectedReporte(report1.getReportTitle()+"\n"
+                +report1.getHeader()+"\n"+report1.getPreface()+"\n"
+                +report1.getContent()+"\n"+report1.getFooter());      
         }
       ///////////////////////////////////////////////////////////////////// fin
-      
-        
+         
       //AllCandidates ac = new VentanaPrincipal();
       /*
       Iterator certCandidates =
@@ -210,7 +204,8 @@ class buttonHandler implements ActionListener {
             c.getName() + " - " + c.getCertificationType() + 
               " - " + c.getLocation();
       }
-      manager.setSelectedCandidates(selectedCandidates);*/
+      manager.setSelectedCandidates(selectedCandidates);
+      */
     }
   }
   public buttonHandler() {

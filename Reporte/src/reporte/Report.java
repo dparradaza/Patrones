@@ -6,6 +6,7 @@ public class Report {
 	  private String preface;
 	  private String content;
 	  private String footer;
+          
 	  public String getReportTitle() {
 	    return reportTitle;
 	  }

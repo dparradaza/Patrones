@@ -28,6 +28,6 @@ public class ReportBuilderMateria implements IReportBuilder{
 	  }
 	  @Override
 	  public void buildReportTitle() {
-	    report.setReportTitle("Complex Theory Report(2)");
+	    report.setReportTitle("Reporte MAterias(2)");
 	  }
 }
