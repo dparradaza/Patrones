@@ -2,19 +2,18 @@ package reporte;
 
 public class ReportDirector {
 
-    private IReportBuilder myBuilder;
+	private IReportBuilder myBuilder;
 
-    public ReportDirector(IReportBuilder builder) {
-        myBuilder = builder;
-    }   
- 
-    public void buildReport() {
-        myBuilder.cargarReporte();
-        myBuilder.estructurarReporte();
-        
-    }
+	public ReportDirector(IReportBuilder builder) {
+		myBuilder = builder;
+	}
 
-    public Reporte getReport() {
-        return this.myBuilder.getReport();
-    }
+	public void buildReport() {
+		myBuilder.cargarReporte();
+		myBuilder.estructurarReporte();
+	}
+
+	public Reporte getReport() {
+		return this.myBuilder.getReport();
+	}
 }

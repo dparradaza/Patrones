@@ -2,42 +2,53 @@ package reporte;
 
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 public class Reporte {
-    
-    private String titulo;
-    private String fecha;
-    private int cantidad;
-    private ArrayList contenido;
 
-    public String getTitulo() {
-        return titulo;
-    }
+	private String titulo;
+	private String fecha;
+	private int cantidad;
+	private ArrayList contenido;
+	private DefaultTableModel modelo;
 
-    public ArrayList getContenido() {
-        return contenido;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getFecha() {
-        return fecha;
-    }
+	public ArrayList getContenido() {
+		return contenido;
+	}
 
-    public int getCantidad() {
-        return cantidad;
-    }    
+	public String getFecha() {
+		return fecha;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public int getCantidad() {
+		return cantidad;
+	}
 
-    public void setContenido(ArrayList contenido) {
-        this.contenido = contenido;
-    }
+	public DefaultTableModel getModelo() {
+		return modelo;
+	}
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-    
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }    
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public void setContenido(ArrayList contenido) {
+		this.contenido = contenido;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public void setModelo(DefaultTableModel modelo) {
+		this.modelo = modelo;
+	}
 }

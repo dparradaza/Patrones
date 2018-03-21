@@ -11,7 +11,6 @@ public class Materia {
         this.tipo = null;
     }
     
-    
     public String getNombre() {
         return nombre;
     }

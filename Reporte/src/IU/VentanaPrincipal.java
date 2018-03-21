@@ -15,9 +15,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+
 import reporte.IReportBuilder;
 import reporte.Reporte;
 import reporte.ReportBuilderEstudiante;
@@ -34,16 +37,17 @@ public class VentanaPrincipal extends JFrame {
 
     private JComboBox cmbTipoReporte;
     private JPanel pSearchCriteria;
-    private JTextArea taReporte;
+    private JTable taReporte;
 
     public VentanaPrincipal() throws Exception {
         super("Iterator Pattern - Example");
 
         // Create controls
         cmbTipoReporte = new JComboBox();
-        taReporte = new JTextArea(15, 20);
+
+        taReporte = new JTable();
+	       
         //taSelectedCandidates.setMargin(new Insets(1,1,1,1));
-        taReporte.setEditable(false);
 
         pSearchCriteria = new JPanel();
 
@@ -89,6 +93,8 @@ public class VentanaPrincipal extends JFrame {
         GridBagLayout gridbag = new GridBagLayout();
         buttonPanel.setLayout(gridbag);
         GridBagConstraints gbc = new GridBagConstraints();
+        
+        taReporte.setVisible(true);
 
         buttonPanel.add(lblCertificationType);
         buttonPanel.add(cmbTipoReporte);
@@ -96,6 +102,7 @@ public class VentanaPrincipal extends JFrame {
         buttonPanel.add(taReporte);
         buttonPanel.add(panel);
 
+       
         gbc.insets.top = 5;
         gbc.insets.bottom = 5;
         gbc.insets.left = 5;
@@ -142,16 +149,9 @@ public class VentanaPrincipal extends JFrame {
         return (String) cmbTipoReporte.getSelectedItem();
     }
 
-    public void setSelectedReporte(String selectedReporte) {
-        taReporte.setText(selectedReporte);
-        
+    public void setSelectedReporte(DefaultTableModel dataModel) {
+        taReporte.setModel(dataModel);
     }
-    
-    public String verTextArea() {
-        return taReporte.getText();
-        
-    }
-    
 
 }
 
@@ -168,25 +168,22 @@ class buttonHandler implements ActionListener {
             String selection = manager.getTipoReporte();
            
             if (selection.equals("Estudiantes")) {
-                IReportBuilder builder = new ReportBuilderEstudiante("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/datos.properties");
+                IReportBuilder builder = new ReportBuilderEstudiante("/home/daigo/Documentos/LearningEverything/Patrones/Reporte/src/reporte/datos.properties");
                 ReportDirector reportDirector = new ReportDirector(builder);
                 reportDirector.buildReport();
                 Reporte report = reportDirector.getReport();
                 
-                manager.setSelectedReporte("Titulo: "+report.getTitulo()+"\n fecha: "+report.getFecha());
+                manager.setSelectedReporte(report.getModelo());
               
    
               
             } else {
-                IReportBuilder builder1 = new ReportBuilderMateria("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/materias.properties");
+                IReportBuilder builder1 = new ReportBuilderMateria("/home/daigo/Documentos/LearningEverything/Patrones/Reporte/src/reporte/materias.properties");
                 ReportDirector reportDirector1 = new ReportDirector(builder1);
                 reportDirector1.buildReport();
                 Reporte report1 = reportDirector1.getReport();
-                manager.setSelectedReporte("Titulo: "+report1.getTitulo()+"\n fecha: "+report1.getFecha());
                 
-                for (int i = 0; i <= report1.getContenido().size(); i++) {
-                    manager.setSelectedReporte(manager.verTextArea()+"\n ");
-                }
+                manager.setSelectedReporte(report1.getModelo());
                 
             }
       
