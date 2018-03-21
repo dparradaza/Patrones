@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package IU;
 
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
@@ -24,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import reporte.IReportBuilder;
-import reporte.Report;
+import reporte.Reporte;
 import reporte.ReportBuilderEstudiante;
 import reporte.ReportBuilderMateria;
 import reporte.ReportDirector;
@@ -149,7 +144,14 @@ public class VentanaPrincipal extends JFrame {
 
     public void setSelectedReporte(String selectedReporte) {
         taReporte.setText(selectedReporte);
+        
     }
+    
+    public String verTextArea() {
+        return taReporte.getText();
+        
+    }
+    
 
 }
 
@@ -164,25 +166,28 @@ class buttonHandler implements ActionListener {
         }
         if (e.getActionCommand().equals(VentanaPrincipal.GENERAR_REPORTE)) {
             String selection = manager.getTipoReporte();
-            //////////// Generar Reportes
+           
             if (selection.equals("Estudiantes")) {
-                IReportBuilder builder = new ReportBuilderEstudiante();
+                IReportBuilder builder = new ReportBuilderEstudiante("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/datos.properties");
                 ReportDirector reportDirector = new ReportDirector(builder);
                 reportDirector.buildReport();
-                Report report = reportDirector.getReport();
-                //use report object as per business
-                manager.setSelectedReporte(report.getReportTitle() + "\n"
-                        + report.getHeader() + "\n" + report.getPreface() + "\n"
-                        + report.getContent() + "\n" + report.getFooter());
+                Reporte report = reportDirector.getReport();
+                
+                manager.setSelectedReporte("Titulo: "+report.getTitulo()+"\n fecha: "+report.getFecha());
+              
+   
+              
             } else {
-                IReportBuilder builder1 = new ReportBuilderMateria();
+                IReportBuilder builder1 = new ReportBuilderMateria("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/materias.properties");
                 ReportDirector reportDirector1 = new ReportDirector(builder1);
                 reportDirector1.buildReport();
-                Report report1 = reportDirector1.getReport();
-                //use report object as per business
-                manager.setSelectedReporte(report1.getReportTitle() + "\n"
-                        + report1.getHeader() + "\n" + report1.getPreface() + "\n"
-                        + report1.getContent() + "\n" + report1.getFooter());
+                Reporte report1 = reportDirector1.getReport();
+                manager.setSelectedReporte("Titulo: "+report1.getTitulo()+"\n fecha: "+report1.getFecha());
+                
+                for (int i = 0; i <= report1.getContenido().size(); i++) {
+                    manager.setSelectedReporte(manager.verTextArea()+"\n ");
+                }
+                
             }
       
         }

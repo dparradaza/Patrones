@@ -6,18 +6,15 @@ public class ReportDirector {
 
     public ReportDirector(IReportBuilder builder) {
         myBuilder = builder;
-    }
-
+    }   
+ 
     public void buildReport() {
-        // report building logic/steps
-        myBuilder.buildReportTitle();
-        myBuilder.buildHeader();
-        myBuilder.buildPreface();
-        myBuilder.buildContent();
-        myBuilder.buildFooter();
+        myBuilder.cargarReporte();
+        myBuilder.estructurarReporte();
+        
     }
 
-    public Report getReport() {
+    public Reporte getReport() {
         return this.myBuilder.getReport();
     }
 }

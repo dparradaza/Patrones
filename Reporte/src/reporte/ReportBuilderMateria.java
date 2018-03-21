@@ -1,33 +1,51 @@
 package reporte;
-/* Build the report about Complex Theory course*/
-/*Adapted by HAD*/
-public class ReportBuilderMateria implements IReportBuilder{
-    private Report report; 
-	  public ReportBuilderMateria(){
-	    report = new Report();
-	  }
-	  @Override
-	  public Report getReport(){   
-	    return report;
-	  }
-	  @Override
-	  public void buildContent() {
-	    report.setContent("My first report with Builder design pattern about Complex Theory");
-	  }
-	  @Override
-	  public void buildFooter() {
-	    report.setFooter("MCIC-UDFJC");
-	  }
-	  @Override
-	  public void buildHeader() {
-	    report.setHeader("Mandatory course  of Telematic Emphasis");
-	  }
-	  @Override
-	  public void buildPreface() {
-	    report.setPreface("Report using Builder by : MCIC student");
-	  }
-	  @Override
-	  public void buildReportTitle() {
-	    report.setReportTitle("Reporte MAterias(2)");
-	  }
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Properties;
+
+public class ReportBuilderMateria implements IReportBuilder {
+
+    private Reporte report;
+    private String ruta;
+
+    public ReportBuilderMateria(String ruta) {
+        this.ruta = ruta;
+        report = new Reporte();
+        report.setContenido(new ArrayList<Materia>());
+    }
+
+    @Override
+    public void cargarReporte() {
+        try {
+            Properties input = new Properties();
+            input.load(new FileInputStream(ruta));
+
+            report.setTitulo(input.getProperty("titulo"));
+            report.setFecha(input.getProperty("fecha"));
+            report.setCantidad(Integer.parseInt(input.getProperty("cantidad")));
+
+            for (int i = 1; i <= report.getCantidad(); i++) {
+                Materia materia = new Materia();
+                materia.setNombre(input.getProperty("nombre" + i));
+                materia.setCreditos(Integer.parseInt(input.getProperty("creditos" + i)));
+                materia.setTipo(input.getProperty("tipo" + i));
+                report.getContenido().add(materia);
+            }
+
+        } catch (Exception e) {
+        }
+
+    }
+
+    @Override
+    public String estructurarReporte() {
+        return null;
+    }
+
+    @Override
+    public Reporte getReport() {
+        return report;
+    }
+
 }
