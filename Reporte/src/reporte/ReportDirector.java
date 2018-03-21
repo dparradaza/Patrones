@@ -14,6 +14,6 @@ public class ReportDirector {
 	}
 
 	public Reporte getReport() {
-		return this.myBuilder.getReport();
+		return myBuilder.getReport();
 	}
 }

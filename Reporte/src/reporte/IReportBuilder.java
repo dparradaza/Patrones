@@ -1,12 +1,17 @@
 package reporte;
 
-import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
-public interface IReportBuilder {
+public abstract class IReportBuilder {
+	
+	protected Reporte report;
+	protected String ruta;
+	protected ArrayList contenido;
 
-	public void cargarReporte();
+	public abstract void cargarReporte();
+	public abstract void estructurarReporte();
 
-	public void estructurarReporte();
-
-	public Reporte getReport();
+	public Reporte getReport() {
+		return report;
+	}
 }

@@ -9,7 +9,7 @@ public class ReportPrueba {
 
 	public static void main(String[] args) throws Exception {
 
-		VentanaPrincipal v = new VentanaPrincipal();
+		VentanaPrincipal ventana = new VentanaPrincipal();
 		JFrame frame = new VentanaPrincipal();
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

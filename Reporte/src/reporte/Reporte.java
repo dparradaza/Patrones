@@ -9,15 +9,10 @@ public class Reporte {
 	private String titulo;
 	private String fecha;
 	private int cantidad;
-	private ArrayList contenido;
 	private DefaultTableModel modelo;
 
 	public String getTitulo() {
 		return titulo;
-	}
-
-	public ArrayList getContenido() {
-		return contenido;
 	}
 
 	public String getFecha() {
@@ -35,11 +30,7 @@ public class Reporte {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
-	public void setContenido(ArrayList contenido) {
-		this.contenido = contenido;
-	}
-
+	
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}

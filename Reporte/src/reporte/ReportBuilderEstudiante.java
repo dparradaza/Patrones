@@ -6,18 +6,14 @@ import java.util.Properties;
 
 import javax.swing.table.DefaultTableModel;
 
-public class ReportBuilderEstudiante implements IReportBuilder {
-
-	private Reporte report;
-	private String ruta;
-
+public class ReportBuilderEstudiante extends IReportBuilder {
+	
 	public ReportBuilderEstudiante(String ruta) {
 		this.ruta = ruta;
 		report = new Reporte();
-		report.setContenido(new ArrayList<Estudiante>());
+		contenido = new ArrayList<Estudiante>();
 	}
 
-	@Override
 	public void cargarReporte() {
 		try {
 			Properties input = new Properties();
@@ -32,7 +28,7 @@ public class ReportBuilderEstudiante implements IReportBuilder {
 				estudiante.setNombre(input.getProperty("nombre" + i));
 				estudiante.setCodigo(input.getProperty("codigo" + i));
 				estudiante.setProyecto(input.getProperty("proyecto" + i));
-				report.getContenido().add(estudiante);
+				contenido.add(estudiante);
 			}
 
 		} catch (Exception e) {
@@ -40,25 +36,19 @@ public class ReportBuilderEstudiante implements IReportBuilder {
 		}
 	}
 
-	@Override
 	public void estructurarReporte() {
 		DefaultTableModel dtm = new DefaultTableModel();
 		String[] data = new String[3];
 		String[] columnas = { "Nombre", "Codigo", "Proyecto" };
 		dtm.setColumnIdentifiers(columnas);
-		for (int i = 0; i < report.getContenido().size(); i++) {
-			Estudiante estudiante = (Estudiante) report.getContenido().get(i);
+		for (int i = 0; i < contenido.size(); i++) {
+			Estudiante estudiante = (Estudiante) contenido.get(i);
 			data[0] = estudiante.getNombre();
 			data[1] = estudiante.getCodigo();
 			data[2] = estudiante.getProyecto();
 			dtm.addRow(data);
 		}
 		report.setModelo(dtm);
-	}
-
-	@Override
-	public Reporte getReport() {
-		return report;
 	}
 
 }

@@ -27,7 +27,6 @@ import reporte.ReportDirector;
 
 public class VentanaPrincipal extends JFrame {
 
-	public static final String nuevaLinea = "\n";
 	public static final String GENERAR_REPORTE = "Generar Reporte";
 	public static final String SALIR = "Salir";
 	public static final String ESTUDIANTES = "Estudiantes";
@@ -154,7 +153,7 @@ public class VentanaPrincipal extends JFrame {
 		tablaReporte.setModel(dataModel);
 	}
 
-	public void setArea(String encabezado) {
+	public void setEncabezado(String encabezado) {
 		taEncabezado.setText(encabezado);
 	}
 
@@ -178,7 +177,7 @@ class buttonHandler implements ActionListener {
 				reportDirector.buildReport();
 				Reporte report = reportDirector.getReport();
 				manager.setSelectedReporte(report.getModelo());
-				manager.setArea(report.getTitulo() + ".   Fecha: " + report.getFecha());
+				manager.setEncabezado(report.getTitulo() + ".   Fecha: " + report.getFecha());
 
 			} else {
 				IReportBuilder builder1 = new ReportBuilderMateria("src/archivos/materias.properties");
@@ -186,7 +185,7 @@ class buttonHandler implements ActionListener {
 				reportDirector1.buildReport();
 				Reporte report1 = reportDirector1.getReport();
 				manager.setSelectedReporte(report1.getModelo());
-				manager.setArea(report1.getTitulo() + ".   Fecha: " + report1.getFecha());
+				manager.setEncabezado(report1.getTitulo() + ".   Fecha: " + report1.getFecha());
 			}
 		}
 	}

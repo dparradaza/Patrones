@@ -6,18 +6,14 @@ import java.util.Properties;
 
 import javax.swing.table.DefaultTableModel;
 
-public class ReportBuilderMateria implements IReportBuilder {
-
-	private Reporte report;
-	private String ruta;
+public class ReportBuilderMateria extends IReportBuilder {
 
 	public ReportBuilderMateria(String ruta) {
 		this.ruta = ruta;
 		report = new Reporte();
-		report.setContenido(new ArrayList<Materia>());
+		contenido =new ArrayList<Materia>();
 	}
 
-	@Override
 	public void cargarReporte() {
 		try {
 			Properties input = new Properties();
@@ -32,7 +28,7 @@ public class ReportBuilderMateria implements IReportBuilder {
 				materia.setNombre(input.getProperty("nombre" + i));
 				materia.setCreditos(Integer.parseInt(input.getProperty("creditos" + i)));
 				materia.setTipo(input.getProperty("tipo" + i));
-				report.getContenido().add(materia);
+				contenido.add(materia);
 			}
 
 		} catch (Exception e) {
@@ -41,25 +37,19 @@ public class ReportBuilderMateria implements IReportBuilder {
 
 	}
 
-	@Override
 	public void estructurarReporte() {
 		DefaultTableModel dtm = new DefaultTableModel();
 		String[] data = new String[3];
 		String[] columnas = { "Nombre", "Creditos", "Tipo" };
 		dtm.setColumnIdentifiers(columnas);
-		for (int i = 0; i < report.getContenido().size(); i++) {
-			Materia materia = (Materia) report.getContenido().get(i);
+		for (int i = 0; i < contenido.size(); i++) {
+			Materia materia = (Materia) contenido.get(i);
 			data[0] = materia.getNombre();
 			data[1] = "" + materia.getCreditos();
 			data[2] = materia.getTipo();
 			dtm.addRow(data);
 		}
 		report.setModelo(dtm);
-	}
-
-	@Override
-	public Reporte getReport() {
-		return report;
 	}
 
 }
