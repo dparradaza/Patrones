@@ -36,16 +36,16 @@ public class ReportBuilderEstudiante implements IReportBuilder {
 			}
 
 		} catch (Exception e) {
+			System.err.println("Error - No cargo correctamente el archivo de reporte estudiantes");
 		}
 	}
 
 	@Override
 	public void estructurarReporte() {
 		DefaultTableModel dtm = new DefaultTableModel();
-		String[] data = new String[3];		
-		dtm.addColumn("Nombre");
-		dtm.addColumn("Creditos");
-		dtm.addColumn("Tipo");
+		String[] data = new String[3];
+		String[] columnas = { "Nombre", "Codigo", "Proyecto" };
+		dtm.setColumnIdentifiers(columnas);
 		for (int i = 0; i < report.getContenido().size(); i++) {
 			Estudiante estudiante = (Estudiante) report.getContenido().get(i);
 			data[0] = estudiante.getNombre();

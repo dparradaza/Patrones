@@ -36,6 +36,7 @@ public class ReportBuilderMateria implements IReportBuilder {
 			}
 
 		} catch (Exception e) {
+
 		}
 
 	}
@@ -43,10 +44,9 @@ public class ReportBuilderMateria implements IReportBuilder {
 	@Override
 	public void estructurarReporte() {
 		DefaultTableModel dtm = new DefaultTableModel();
-		String[] data = new String[3];	
-		dtm.addColumn("Nombre");
-		dtm.addColumn("Creditos");
-		dtm.addColumn("Tipo");
+		String[] data = new String[3];
+		String[] columnas = { "Nombre", "Creditos", "Tipo" };
+		dtm.setColumnIdentifiers(columnas);
 		for (int i = 0; i < report.getContenido().size(); i++) {
 			Materia materia = (Materia) report.getContenido().get(i);
 			data[0] = materia.getNombre();
