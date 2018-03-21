@@ -37,7 +37,8 @@ public class VentanaPrincipal extends JFrame {
 
     private JComboBox cmbTipoReporte;
     private JPanel pSearchCriteria;
-    private JTable taReporte;
+    private JTable tablaReporte;
+    private JTextArea taEncabezado;
 
     public VentanaPrincipal() throws Exception {
         super("Iterator Pattern - Example");
@@ -45,10 +46,10 @@ public class VentanaPrincipal extends JFrame {
         // Create controls
         cmbTipoReporte = new JComboBox();
 
-        taReporte = new JTable();
-	       
-        //taSelectedCandidates.setMargin(new Insets(1,1,1,1));
+        tablaReporte = new JTable();
+        taEncabezado = new JTextArea();
 
+        //taSelectedCandidates.setMargin(new Insets(1,1,1,1));
         pSearchCriteria = new JPanel();
 
         cmbTipoReporte.addItem(VentanaPrincipal.ESTUDIANTES);
@@ -85,7 +86,7 @@ public class VentanaPrincipal extends JFrame {
         gbc2.gridx = 0;
         gbc2.gridy = 0;
         gridbag2.setConstraints(btnGetGenerarReporte, gbc2);
-        gbc2.gridx = 3;
+        gbc2.gridx = 4;
         gbc2.gridy = 0;
         gridbag2.setConstraints(btnSalir, gbc2);
 
@@ -93,16 +94,16 @@ public class VentanaPrincipal extends JFrame {
         GridBagLayout gridbag = new GridBagLayout();
         buttonPanel.setLayout(gridbag);
         GridBagConstraints gbc = new GridBagConstraints();
-        
-        taReporte.setVisible(true);
+
+        tablaReporte.setVisible(true);
 
         buttonPanel.add(lblCertificationType);
         buttonPanel.add(cmbTipoReporte);
         buttonPanel.add(lblSelectedCandidates);
-        buttonPanel.add(taReporte);
+        buttonPanel.add(taEncabezado);
+        buttonPanel.add(tablaReporte);
         buttonPanel.add(panel);
 
-       
         gbc.insets.top = 5;
         gbc.insets.bottom = 5;
         gbc.insets.left = 5;
@@ -122,10 +123,15 @@ public class VentanaPrincipal extends JFrame {
 
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
-        gbc.gridy = 1;
-        gridbag.setConstraints(taReporte, gbc);
+        gbc.gridy = 2;
+        gridbag.setConstraints(tablaReporte, gbc);
 
-        gbc.insets.left = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gridbag.setConstraints(taEncabezado, gbc);
+
+        gbc.insets.left = 3;
         gbc.insets.right = 2;
         gbc.insets.top = 40;
         gbc.gridx = 1;
@@ -150,7 +156,11 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void setSelectedReporte(DefaultTableModel dataModel) {
-        taReporte.setModel(dataModel);
+        tablaReporte.setModel(dataModel);
+    }
+
+    public void setArea(String encabezado) {
+        taEncabezado.setText(encabezado);
     }
 
 }
@@ -166,27 +176,27 @@ class buttonHandler implements ActionListener {
         }
         if (e.getActionCommand().equals(VentanaPrincipal.GENERAR_REPORTE)) {
             String selection = manager.getTipoReporte();
-           
+
             if (selection.equals("Estudiantes")) {
-                IReportBuilder builder = new ReportBuilderEstudiante("/home/daigo/Documentos/LearningEverything/Patrones/Reporte/src/reporte/datos.properties");
+                IReportBuilder builder = new ReportBuilderEstudiante("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/datos.properties");
                 ReportDirector reportDirector = new ReportDirector(builder);
                 reportDirector.buildReport();
                 Reporte report = reportDirector.getReport();
-                
+
                 manager.setSelectedReporte(report.getModelo());
-              
-   
-              
+                manager.setArea(report.getTitulo() + ".   Fecha: " + report.getFecha());
+
             } else {
-                IReportBuilder builder1 = new ReportBuilderMateria("/home/daigo/Documentos/LearningEverything/Patrones/Reporte/src/reporte/materias.properties");
+                IReportBuilder builder1 = new ReportBuilderMateria("/media/diegoparra/67AC3AFB158E880C/NetBeansProjects/EjercicioPuntuall/src/reporte/materias.properties");
                 ReportDirector reportDirector1 = new ReportDirector(builder1);
                 reportDirector1.buildReport();
                 Reporte report1 = reportDirector1.getReport();
-                
+
                 manager.setSelectedReporte(report1.getModelo());
-                
+                manager.setArea(report1.getTitulo() + ".   Fecha: " + report1.getFecha());
+
             }
-      
+
         }
     }
 
