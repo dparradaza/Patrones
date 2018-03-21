@@ -28,6 +28,7 @@ public class ReportBuilderEstudiante extends IReportBuilder {
 				estudiante.setNombre(input.getProperty("nombre" + i));
 				estudiante.setCodigo(input.getProperty("codigo" + i));
 				estudiante.setProyecto(input.getProperty("proyecto" + i));
+                                estudiante.setCorreo(input.getProperty("correo"+i));
 				contenido.add(estudiante);
 			}
 
@@ -38,14 +39,16 @@ public class ReportBuilderEstudiante extends IReportBuilder {
 
 	public void estructurarReporte() {
 		DefaultTableModel dtm = new DefaultTableModel();
-		String[] data = new String[3];
-		String[] columnas = { "Nombre", "Codigo", "Proyecto" };
+		String[] data = new String[4];
+		String[] columnas = { "Nombre", "Codigo", "Proyecto" ,"Correo"};
 		dtm.setColumnIdentifiers(columnas);
+                dtm.addRow(columnas);
 		for (int i = 0; i < contenido.size(); i++) {
 			Estudiante estudiante = (Estudiante) contenido.get(i);
 			data[0] = estudiante.getNombre();
 			data[1] = estudiante.getCodigo();
 			data[2] = estudiante.getProyecto();
+                        data[3] = estudiante.getCorreo();
 			dtm.addRow(data);
 		}
 		report.setModelo(dtm);

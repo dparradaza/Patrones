@@ -42,6 +42,7 @@ public class ReportBuilderMateria extends IReportBuilder {
 		String[] data = new String[3];
 		String[] columnas = { "Nombre", "Creditos", "Tipo" };
 		dtm.setColumnIdentifiers(columnas);
+                dtm.addRow(columnas);
 		for (int i = 0; i < contenido.size(); i++) {
 			Materia materia = (Materia) contenido.get(i);
 			data[0] = materia.getNombre();

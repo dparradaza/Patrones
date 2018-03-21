@@ -71,7 +71,7 @@ public class VentanaPrincipal extends JFrame {
 		JPanel buttonPanel = new JPanel();
 		JPanel panel = new JPanel();
 		
-		tablaReporte.setEnabled(true);
+		tablaReporte.setEnabled(false);
 		taEncabezado.setEditable(false);
 		
 		GridBagLayout gridbag2 = new GridBagLayout();
